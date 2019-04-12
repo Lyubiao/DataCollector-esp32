@@ -1,12 +1,10 @@
 from cmd_parse import ParseCmd
 import wifi
 from machine import Pin,reset
-
+import utime
 print('###########################################')
 ts = ParseCmd('test_cfg')
-import utime
-
-utime.sleep_ms(1000)
+utime.sleep_ms(200)
 if 'SmartConnent' in ts.dat:
     if ts.dat['SmartConnent'] == 1:
         ts.dat['SmartConnent'] = 0

@@ -52,7 +52,7 @@ class ParseCmd():
                     self.updata_file()
 
 def unit_test():
-    ts = ParseCmd('t_cfg')
+    ts = ParseCmd('test_cfg')
     print(ts.dat)
     ts.dat['SafeMode'] = 10
     ts.dat['MinI'] = 10

@@ -107,26 +107,34 @@ class cs5460a(object):
         voltage = self.read(CS5460A_RMS_VOLTAGE)
         temp = (voltage[2] + voltage[1] * 256 + voltage[0] * 65536)
         V = self.VOLTAGE_MULTIPLIER * temp
-        return V
+        if V>=0 and V<380:
+            return V
+        else:
+            return None
 
     def read_i(self):
         current = self.read(CS5460A_RMS_CURRENT)
         temp = (current[2] + current[1] * 256 + current[0] * 65536)
         A = self.CURRENT_MULTIPLIER * temp
-        return A
+        
+        if A>=0 and A<20:
+            return A
+        else:
+            return None
 
     def read_p(self):
         true_power = self.read(CS5460A_TRUE_POWER)
         temp = self._conv(true_power)
         P = self.POWER_MULTIPLIER * temp
-        return P
-
-
-from machine import Pin
-import utime
+        if P>=0 and P<2500:
+            return P
+        else:
+            return None
 
 
 def unit_test():
+    from machine import Pin
+    import utime
     vspi = SPI(-1, sck=Pin(5), mosi=Pin(23), miso=Pin(19), baudrate=2000000)  # -1 software spi
     ts = cs5460a(vspi)
 
@@ -137,7 +145,6 @@ def unit_test():
         print(ts.read_i())
         print(ts.read_u())
         print(ts.read_p())
-
 
 if __name__ == '__main__':
     unit_test()

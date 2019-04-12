@@ -31,17 +31,22 @@ class LOG:
                         sys.print_exception(e, f)
         return _deco
 
+
 ts=LOG()
 @ts.logging
 def bar():
     raise ValueError
     print('this is test output run.log')
-    # c = e
+   
+
+def unit_test():
+    while True:
+        bar()
+        import time
+        time.sleep(1)
 
 
-# while True:
-#     bar()
-#     import utime
-#     utime.sleep_ms(1000)
-# # ts=LOG()
-# ts.getsize('boot.py')
+if __name__ == '__main__':
+    unit_test()
+
+
