@@ -150,13 +150,13 @@ class ZW_Net(control):
         if self.check_ack(recvbuf, b'\r\nERROR\r\n'):
             self.is_setup+=1
             print('et=',self.is_setup)
-        if self.check_ack(recvbuf, b'219.222.189.98,9954'):
+        if self.check_ack(recvbuf, b'10.10.10.237,9954'):
             self.wdt.feed()
             print('feed_______dog')
             recvbuf = bytes(recvbuf)
             buf = recvbuf.split(b',')
             # print(buf)
-            index = buf.index(b'219.222.189.98')
+            index = buf.index(b'10.10.10.237')
             data_len = int(buf[index + 2])
             # print(data_len)
             num = recvbuf.find(buf[index])
@@ -179,7 +179,7 @@ class ZW_Net(control):
                         str = result[1].decode('utf-8')
                         Pack = ZW_Net.A.command((str))
                         try:
-                            self.sendto('zwidas.top', '9954', Pack)
+                            self.sendto('10.10.10.237', '9954', Pack)
                             utime.sleep_ms(100)
                             ZW_Net.fo.analysis_cmd(str)
                         except Exception as e:
@@ -223,7 +223,7 @@ class ZW_Net(control):
 #         send = 0
 #         Pack = ts.A.collect('ack', str(sync))
 #         print('len=%d'%len(Pack))
-#         ts.sendto('219.222.189.98', '9954', Pack)
+#         ts.sendto('10.10.10.237', '9954', Pack)
 #         utime.sleep_ms(100)
 #
 #
